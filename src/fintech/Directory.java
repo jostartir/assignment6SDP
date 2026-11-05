@@ -14,4 +14,8 @@ public class Directory implements ProjectElement {
     public void addElement(ProjectElement element) {
         elements.add(element);
     }
+    @Override
+    public void accept(ProjectVisitor visitor) {
+        visitor.visit(this);
+    }
 }

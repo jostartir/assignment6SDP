@@ -25,4 +25,10 @@ public class SourceCodeFile implements ProjectElement{
     public boolean isHasSecurityRisk(){
         return hasSecurityRisk;
     }
+
+    @Override
+    public void accept(ProjectVisitor visitor) {
+        visitor.visit(this);
+    }
+
 }

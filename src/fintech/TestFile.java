@@ -10,4 +10,8 @@ public class TestFile implements ProjectElement {
         this.linesOfCode = linesOfCode;
         this.testCount = testCount;
     }
+    @Override
+    public void accept(ProjectVisitor visitor) {
+        visitor.visit(this);
+    }
 }

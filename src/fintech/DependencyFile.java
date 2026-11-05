@@ -10,4 +10,9 @@ public class DependencyFile implements ProjectElement {
         this.version = version;
         this.vulnerable = vulnerable;
     }
+
+    @Override
+    public void accept(ProjectVisitor visitor) {
+        visitor.visit(this);
+    }
 }
