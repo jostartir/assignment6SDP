@@ -10,10 +10,13 @@ public class TestFile implements ProjectElement {
         this.linesOfCode = linesOfCode;
         this.testCount = testCount;
     }
+    public int getLinesOfCode() {
+        return linesOfCode;
+    }
 
-    public String getFileName() { return fileName; }
-    public int getLinesOfCode() { return linesOfCode; }
-    public int getTestCount() { return testCount; }
+    public int getTestCount() {
+        return testCount;
+    }
 
     @Override
     public void accept(ProjectVisitor visitor) {

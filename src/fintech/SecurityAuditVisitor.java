@@ -14,6 +14,9 @@ public class SecurityAuditVisitor implements ProjectVisitor {
         if (file.isHasSecurityRisk()){
             issues.add("High-risk source file: " + file.getFileName());
         }
+        if (file.hasHardcodedCredentials()) {
+            issues.add("Hardcoded credentials in: " + file.getFileName());
+        }
     }
 
     @Override
@@ -51,5 +54,22 @@ public class SecurityAuditVisitor implements ProjectVisitor {
 
     public List<String> getIssues() {
         return Collections.unmodifiableList(issues);
+    }
+
+    public int getSecurityScore() {
+        return Math.max(0, 100 - issues.size() * 20);
+    }
+
+    public void printReport() {
+        System.out.println("Security score: " + getSecurityScore() + "/100");
+
+        if (issues.isEmpty()) {
+            System.out.println("No security issues found.");
+            return;
+        }
+
+        for (String issue : issues) {
+            System.out.println(issue);
+        }
     }
 }

@@ -5,12 +5,14 @@ public class SourceCodeFile implements ProjectElement{
     private final int linesOfCode;
     private final int complexity;
     private final boolean hasSecurityRisk;
+    private final boolean hasHardcodedCredentials;
 
-    public SourceCodeFile(String fileName,int linesOfCode, int complexity, boolean hasSecurityRisk){
+    public SourceCodeFile(String fileName,int linesOfCode, int complexity, boolean hasSecurityRisk,boolean hasHardcodedCredentials){
         this.fileName = fileName;
         this.linesOfCode = linesOfCode;
         this.complexity = complexity;
         this.hasSecurityRisk = hasSecurityRisk;
+        this.hasHardcodedCredentials = hasHardcodedCredentials;
     }
 
     public String getFileName(){
@@ -24,6 +26,9 @@ public class SourceCodeFile implements ProjectElement{
     }
     public boolean isHasSecurityRisk(){
         return hasSecurityRisk;
+    }
+    public boolean hasHardcodedCredentials() {
+        return hasHardcodedCredentials;
     }
 
     @Override
