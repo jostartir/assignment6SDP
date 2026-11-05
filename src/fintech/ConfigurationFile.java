@@ -12,6 +12,12 @@ public class ConfigurationFile implements ProjectElement {
         this.hasExposedCredentials = hasExposedCredentials;
     }
 
+
+    public String getFileName() { return fileName; }
+    public boolean hasInsecureSettings() { return hasInsecureSettings; }
+    public boolean hasExposedCredentials() { return hasExposedCredentials; }
+
+
     @Override
     public void accept(ProjectVisitor visitor) {
         visitor.visit(this);

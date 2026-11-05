@@ -11,6 +11,11 @@ public class DependencyFile implements ProjectElement {
         this.vulnerable = vulnerable;
     }
 
+    public String getPackageName() { return packageName; }
+    public String getVersion() { return version; }
+    public boolean isVulnerable() { return vulnerable; }
+
+
     @Override
     public void accept(ProjectVisitor visitor) {
         visitor.visit(this);
