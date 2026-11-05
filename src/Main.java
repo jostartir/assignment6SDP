@@ -1,13 +1,45 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import fintech.*;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+public class Main {
+    public static void main(String[] args) {
+        Directory project = new Directory("fintech-project");
+
+        Directory sourceDirectory = new Directory("src");
+        sourceDirectory.addElement(new SourceCodeFile("PaymentService.java", 20, 8, false, false));
+        sourceDirectory.addElement(new SourceCodeFile("UserService.java", 10, 4, false, false));
+
+        Directory testsDirectory = new Directory("tests");
+        testsDirectory.addElement(new TestFile("PaymentServiceTest.java", 30, 4));
+
+        Directory configDirectory = new Directory("config");
+        configDirectory.addElement(new ConfigurationFile("application.properties", false, false));
+
+        project.addElement(sourceDirectory);
+        project.addElement(testsDirectory);
+        project.addElement(configDirectory);
+
+        project.addElement(new ConfigurationFile("pom.xml", false, false));
+
+        project.addElement(new DependencyFile("junit-jupiter", "5.11.0", false));
+
+        SecurityAuditVisitor securityVisitor = new SecurityAuditVisitor();
+        project.accept(securityVisitor);
+        securityVisitor.printReport();
+
+        ProjectStatisticsVisitor statisticsVisitor = new ProjectStatisticsVisitor();
+        project.accept(statisticsVisitor);
+        statisticsVisitor.printReport();
+
+        QualityGateVisitor qualityVisitor = new QualityGateVisitor();
+        project.accept(qualityVisitor);
+        qualityVisitor.printReport();
+
+        ComplianceVisitor complianceVisitor = new ComplianceVisitor();
+        project.accept(complianceVisitor);
+        complianceVisitor.printReport();
+
+        TechnicalDebtVisitor debtVisitor = new TechnicalDebtVisitor();
+        project.accept(debtVisitor);
+        debtVisitor.printReport();
     }
 }

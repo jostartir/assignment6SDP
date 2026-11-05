@@ -21,6 +21,7 @@ public class ProjectStatisticsVisitor implements ProjectVisitor{
     @Override
     public void visit(TestFile file) {
         totalFiles++;
+        testFiles++;
         linesOfCode += file.getLinesOfCode();
         numberOfTests += file.getTestCount();
 
@@ -66,6 +67,6 @@ public class ProjectStatisticsVisitor implements ProjectVisitor{
         System.out.println("Number of test: " + numberOfTests);
         System.out.println("Dependencies: " + dependencies);
         System.out.println("Average complexity: " + getAverageComplexity());
-        System.out.printf("Test/source ratio: " + getTestSourceRatio());
+        System.out.println("Test/source ratio: " + getTestSourceRatio());
     }
 }
